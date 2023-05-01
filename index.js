@@ -11,21 +11,7 @@ app.use(session({
 	//store: mongoStore, //default is memory store 
 	saveUninitialized: false, 
 	resave: true
-}
-));
-
-// Number of times the page is refreshed
-//var numPageHits = 0;
-
-app.get("/", (req, res) => {
-    if (req.session.numPageHits == null) {
-        req.session.numPageHits = 0;
-    } else {
-        req.session.numPageHits++;
-    }
-    //numPageHits++;
-    res.send("You have visited this page " + req.session.numPageHits + " times!");
-})
+}));
 
 // Port information
 const port = process.env.PORT || 5500;
