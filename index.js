@@ -14,7 +14,7 @@ const app = express();
 
 const Joi = require("joi");
 
-const expireTime = 24 * 60 * 60 * 1000; //expires after 1 day  (hours * minutes * seconds * millis)
+const expireTime = 1 * 60 * 60 * 1000; //expires after 1 day  (hours * minutes * seconds * millis)
 
 /* secret information section */
 const mongodb_host = process.env.MONGODB_HOST;
@@ -158,6 +158,32 @@ app.post('/submitUser', async (req,res) => {
 	   console.log(validationResult.error);
 	   res.redirect("/createUser");
 	   return;
+
+       app.post('/submitUser', async (req,res) => {
+        var username = req.body.username;
+        var password = req.body.password;
+    
+        const schema = Joi.object(
+            {
+                username: Joi.string().alphanum().max(20).required(),
+                password: Joi.string().max(20).required()
+            });
+        
+        const validationResult = schema.validate({username, password});
+        if (validationResult.error != null) {
+           console.log(validationResult.error);
+           res.redirect("/createUser");
+           return;
+       }
+    
+        var hashedPassword = await bcrypt.hash(password, saltRounds);
+        
+        await userCollection.insertOne({username: username, password: hashedPassword});
+        console.log("Inserted user");
+    
+        var html = "successfully created user";
+        res.send(html);
+    });
    }
 
     var hashedPassword = await bcrypt.hash(password, saltRounds);
