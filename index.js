@@ -8,12 +8,11 @@ const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5050;
 
 const app = express();
 
 const Joi = require("joi");
-
 
 const expireTime = 24 * 60 * 60 * 1000; //expires after 1 day  (hours * minutes * seconds * millis)
 
@@ -82,12 +81,15 @@ app.get('/nosql-injection', async (req,res) => {
     res.send(`<h1>Hello ${username}</h1>`);
 });
 
+
+// About
 app.get('/about', (req,res) => {
     var color = req.query.color;
 
     res.send("<h1 style='color:"+color+";'>Patrick Guichon</h1>");
 });
 
+// Contact
 app.get('/contact', (req,res) => {
     var missingEmail = req.query.missing;
     var html = `
@@ -103,6 +105,7 @@ app.get('/contact', (req,res) => {
     res.send(html);
 });
 
+// Submit email
 app.post('/submitEmail', (req,res) => {
     var email = req.body.email;
     if (!email) {
@@ -113,7 +116,7 @@ app.post('/submitEmail', (req,res) => {
     }
 });
 
-
+// Create user
 app.get('/createUser', (req,res) => {
     var html = `
     create user
@@ -126,7 +129,7 @@ app.get('/createUser', (req,res) => {
     res.send(html);
 });
 
-
+// Login
 app.get('/login', (req,res) => {
     var html = `
     log in
@@ -139,6 +142,7 @@ app.get('/login', (req,res) => {
     res.send(html);
 });
 
+// User submission page
 app.post('/submitUser', async (req,res) => {
     var username = req.body.username;
     var password = req.body.password;
@@ -165,6 +169,7 @@ app.post('/submitUser', async (req,res) => {
     res.send(html);
 });
 
+// Login page
 app.post('/loggingin', async (req,res) => {
     var username = req.body.username;
     var password = req.body.password;
@@ -211,6 +216,7 @@ app.get('/loggedin', (req,res) => {
     res.send(html);
 });
 
+// Logout page
 app.get('/logout', (req,res) => {
 	req.session.destroy();
     var html = `
@@ -235,9 +241,10 @@ app.get('/cat/:id', (req,res) => {
     }
 });
 
-
+// Public page
 app.use(express.static(__dirname + "/public"));
 
+// 404 page
 app.get("*", (req,res) => {
 	res.status(404);
 	res.send("Page not found - 404");
