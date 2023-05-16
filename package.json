@@ -1,0 +1,20 @@
+{
+  "name": "2537-Assignment",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "echo \"No build specified\" && exit 1",
+    "test": "echo \"No test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeanDean69/2537-Assignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeanDean69/2537-Assignment/issues"
+  },
+  "homepage": "https://github.com/SeanDean69/2537-Assignment#readme"
+}
