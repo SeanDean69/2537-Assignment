@@ -1,0 +1,55 @@
+[debug] [2023-05-16T03:57:30.403Z] ----------------------------------------------------------------------
+[debug] [2023-05-16T03:57:30.404Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\deans\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-16T03:57:30.405Z] CLI Version:   11.25.1
+[debug] [2023-05-16T03:57:30.405Z] Platform:      win32
+[debug] [2023-05-16T03:57:30.405Z] Node Version:  v18.14.1
+[debug] [2023-05-16T03:57:30.406Z] Time:          Mon May 15 2023 20:57:30 GMT-0700 (Pacific Daylight Saving Time)
+[debug] [2023-05-16T03:57:30.406Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-16T03:57:30.479Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-16T03:57:30.480Z] > authorizing via signed-in user (deansean59@gmail.com)
+[debug] [2023-05-16T03:57:30.480Z] [iam] checking project sprout-c48fe for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-16T03:57:30.482Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sprout-c48fe:testIamPermissions [none]
+[debug] [2023-05-16T03:57:30.482Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sprout-c48fe:testIamPermissions x-goog-quota-user=projects/sprout-c48fe
+[debug] [2023-05-16T03:57:30.483Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sprout-c48fe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-16T03:57:30.685Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sprout-c48fe:testIamPermissions 200
+[debug] [2023-05-16T03:57:30.685Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sprout-c48fe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-16T03:57:30.686Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sprout-c48fe [none]
+[debug] [2023-05-16T03:57:30.901Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sprout-c48fe 200
+[debug] [2023-05-16T03:57:30.901Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sprout-c48fe {"projectId":"sprout-c48fe","projectNumber":"249695479426","displayName":"Sprout","name":"projects/sprout-c48fe","resources":{"hostingSite":"sprout-c48fe","storageBucket":"sprout-c48fe.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_9a9fb066-0139-4eb4-b436-6b623aab1d72"}
+[info] 
+[info] === Deploying to 'sprout-c48fe'...
+[info] 
+[info] i  deploying firestore, hosting 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2023-05-16T03:57:30.905Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe:test [none]
+[debug] [2023-05-16T03:57:30.905Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe:test [omitted]
+[debug] [2023-05-16T03:57:31.132Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe:test 200
+[debug] [2023-05-16T03:57:31.132Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe:test {}
+[info] +  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2023-05-16T03:57:31.138Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/sprout-c48fe/versions [none]
+[debug] [2023-05-16T03:57:31.139Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/sprout-c48fe/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-05-16T03:57:31.861Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/sprout-c48fe/versions 200
+[debug] [2023-05-16T03:57:31.861Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/sprout-c48fe/versions {"name":"projects/249695479426/sites/sprout-c48fe/versions/445269afd3e6a7a4","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  firestore: deploying indexes... 
+[debug] [2023-05-16T03:57:31.863Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/releases pageSize=10&pageToken=
+[debug] [2023-05-16T03:57:31.865Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2023-05-16T03:57:32.235Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/releases 200
+[debug] [2023-05-16T03:57:32.235Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/releases {"releases":[{"name":"projects/sprout-c48fe/releases/cloud.firestore","rulesetName":"projects/sprout-c48fe/rulesets/bd6003d4-bb6e-4e30-bfee-b05bc8efd8f2","createTime":"2023-03-06T22:01:34.265589Z","updateTime":"2023-04-08T02:16:33.072350Z"},{"name":"projects/sprout-c48fe/releases/firebase.storage/sprout-c48fe.appspot.com","rulesetName":"projects/sprout-c48fe/rulesets/ed37e9b8-54c3-4f00-b853-32f8d28ad0ee","createTime":"2023-03-24T06:54:22.126476Z","updateTime":"2023-04-08T19:35:41.845139Z"}]}
+[debug] [2023-05-16T03:57:32.245Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets/bd6003d4-bb6e-4e30-bfee-b05bc8efd8f2 [none]
+[debug] [2023-05-16T03:57:32.329Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2023-05-16T03:57:32.329Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/indexes {"indexes":[{"name":"projects/sprout-c48fe/databases/(default)/collectionGroups/transportations/indexes/CICAgOjXh4EK","queryScope":"COLLECTION","fields":[{"fieldPath":"userUID","order":"ASCENDING"},{"fieldPath":"timestamp","order":"DESCENDING"},{"fieldPath":"__name__","order":"DESCENDING"}],"state":"READY"}]}
+[debug] [2023-05-16T03:57:32.329Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2023-05-16T03:57:32.405Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets/bd6003d4-bb6e-4e30-bfee-b05bc8efd8f2 200
+[debug] [2023-05-16T03:57:32.405Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets/bd6003d4-bb6e-4e30-bfee-b05bc8efd8f2 [omitted]
+[info] i  firestore: uploading rules firestore.rules... 
+[debug] [2023-05-16T03:57:32.406Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets [none]
+[debug] [2023-05-16T03:57:32.406Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets [omitted]
+[debug] [2023-05-16T03:57:32.614Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets 200
+[debug] [2023-05-16T03:57:32.614Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/sprout-c48fe/rulesets {"name":"projects/sprout-c48fe/rulesets/da6c28bc-c8df-435d-a3d5-13a6f75b51dc","source":{"files":[{"content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if\n          request.time < timestamp.date(2023, 4, 5);\n    }\n  }\n}","name":"firestore.rules"}]},"createTime":"2023-05-16T03:57:32.727407Z","metadata":{"services":["cloud.firestore"]}}
+[debug] [2023-05-16T03:57:32.614Z] [rules] created ruleset projects/sprout-c48fe/rulesets/da6c28bc-c8df-435d-a3d5-13a6f75b51dc
+[debug] [2023-05-16T03:57:32.763Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2023-05-16T03:57:32.764Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/sprout-c48fe/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/sprout-c48fe/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[info] i  firestore: The following indexes are defined in your project but are not present in your firestore indexes file:
+	(transportations) -- (userUID,ASCENDING) (timestamp,DESCENDING)  
