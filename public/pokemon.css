@@ -80,3 +80,8 @@
     width: 300px;
     margin-right: 10px;
 }
+
+.custom-mt-7 {
+    margin-top: 7rem;
+    /* Adjust the value as needed */
+}
