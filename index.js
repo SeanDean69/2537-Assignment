@@ -85,7 +85,74 @@ function adminAuthorization(req, res, next) {
 }
 
 app.get('/', (req, res) => {
-	res.render("index");
+	res.render("index", {current: '/'});
+});
+
+app.get('/cats', (req, res) => {
+	res.render("cats", {current: '/cats'});
+});
+
+app.get('/login', (req, res) => {
+	res.render("login", {current: '/login'});
+});
+
+app.get('/pokemon', (req, res) => {
+	res.render("pokemon"), {current: '/pokemon'};
+});
+
+// A2-1
+// Example middleware function to check authentication
+function requireLogin(req, res, next) {
+	if (!req.isAuthenticated()) {
+		res.redirect('/login'); // Redirect to login page
+	} else {
+		next(); // User is authenticated, proceed to the next middleware or route handler
+	}
+}
+
+// Example route for the /admin page
+app.get('/admin', requireLogin, (req, res) => {
+	// Your code to render the admin page
+});
+
+// A2-2
+// Example middleware function to check authentication and admin role
+function requireAdmin(req, res, next) {
+	if (!req.isAuthenticated() || req.user.role !== 'admin') {
+		res.render('admin', { error: 'You must be logged in as an admin to access this page.' });
+	} else {
+		next(); // User is authenticated and an admin, proceed to the next middleware or route handler
+	}
+}
+
+// A2-3
+app.get('/admin', sessionValidation, adminAuthorization, requireAdmin, async (req, res) => {
+	const result = await userCollection.find().project({ username: 1, _id: 1 }).toArray();
+	const users = getUsers();
+	res.render("admin", { users: result });
+});
+
+// A2-4.0
+// Example routes for promoting and demoting users
+app.get('/admin/promote/:userId', requireAdmin, (req, res) => {
+	const userId = req.params.userId;
+
+	// Update user type to 'admin' in the user data or database
+	promoteUser(userId);
+
+	// Redirect back to the admin page
+	res.redirect('/admin');
+});
+
+// A2-4.5
+app.get('/admin/demote/:userId', requireAdmin, (req, res) => {
+	const userId = req.params.userId;
+
+	// Update user type to 'user' in the user data or database
+	demoteUser(userId);
+
+	// Redirect back to the admin page
+	res.redirect('/admin');
 });
 
 app.get('/nosql-injection', async (req, res) => {
@@ -117,139 +184,6 @@ app.get('/nosql-injection', async (req, res) => {
 
 	res.send(`<h1>Hello ${username}</h1>`);
 });
-
-app.get('/about', (req, res) => {
-	var color = req.query.color;
-
-	res.render("about", { color: color });
-});
-
-app.get('/contact', (req, res) => {
-	var missingEmail = req.query.missing;
-
-	res.render("contact", { missing: missingEmail });
-});
-
-app.post('/submitEmail', (req, res) => {
-	var email = req.body.email;
-	if (!email) {
-		res.redirect('/contact?missing=1');
-	}
-	else {
-		res.render("submitEmail", { email: email });
-	}
-});
-
-
-app.get('/createUser', (req, res) => {
-	res.render("createUser");
-});
-
-
-app.get('/login', (req, res) => {
-	res.render("login");
-});
-
-app.post('/submitUser', async (req, res) => {
-	var username = req.body.username;
-	var password = req.body.password;
-
-	const schema = Joi.object(
-		{
-			username: Joi.string().alphanum().max(20).required(),
-			password: Joi.string().max(20).required()
-		});
-
-	const validationResult = schema.validate({ username, password });
-	if (validationResult.error != null) {
-		console.log(validationResult.error);
-		res.redirect("/createUser");
-		return;
-	}
-
-	var hashedPassword = await bcrypt.hash(password, saltRounds);
-
-	await userCollection.insertOne({ username: username, password: hashedPassword, user_type: "user" });
-	console.log("Inserted user");
-
-	var html = "successfully created user";
-	res.render("submitUser", { html: html });
-});
-
-app.post('/loggingin', async (req, res) => {
-	var username = req.body.username;
-	var password = req.body.password;
-
-	const schema = Joi.string().max(20).required();
-	const validationResult = schema.validate(username);
-	if (validationResult.error != null) {
-		console.log(validationResult.error);
-		res.redirect("/login");
-		return;
-	}
-
-	const result = await userCollection.find({ username: username }).project({ username: 1, password: 1, user_type: 1, _id: 1 }).toArray();
-
-	console.log(result);
-	if (result.length != 1) {
-		console.log("user not found");
-		res.redirect("/login");
-		return;
-	}
-	if (await bcrypt.compare(password, result[0].password)) {
-		console.log("correct password");
-		req.session.authenticated = true;
-		req.session.username = username;
-		req.session.user_type = result[0].user_type;
-		req.session.cookie.maxAge = expireTime;
-
-		res.redirect('/loggedIn');
-		return;
-	}
-	else {
-		console.log("incorrect password");
-		res.redirect("/login");
-		return;
-	}
-});
-
-app.use('/loggedin', sessionValidation);
-app.get('/loggedin', (req, res) => {
-	if (!req.session.authenticated) {
-		res.redirect('/login');
-	}
-	res.render("loggedin");
-});
-
-app.get('/loggedin/info', (req, res) => {
-	res.render("loggedin-info");
-});
-
-app.get('/logout', (req, res) => {
-	req.session.destroy();
-	res.render("loggedout");
-});
-
-
-app.get('/cat/:id', (req, res) => {
-	var cat = req.params.id;
-
-	res.render("cat", { cat: cat });
-});
-
-
-app.get('/admin', sessionValidation, adminAuthorization, async (req, res) => {
-	const result = await userCollection.find().project({ username: 1, _id: 1 }).toArray();
-
-	res.render("admin", { users: result });
-});
-
-app.use(express.static(__dirname + "/public"));
-
-app.get("*", (req, res) => {
-	res.status(404);
-	res.render("404");
-})
 
 app.listen(port, () => {
 	console.log("Node application listening on port " + port);

@@ -1,9 +1,25 @@
-<%- include("templates/header") %> 
-	<div>Users:</div>
+<%- include("templates/header") %>
+    <!-- admin.ejs -->
+    <h1>Admin Page</h1>
     <ul>
-        <% let i=0; %>
-		<% for(i=0; i < users.length; i++) { %>
-        <%- include('templates/user', {user: users[i]})  %> 
-        <% } %> 
+        <% users.forEach(function(user) { %>
+            <li>
+                <%= user.name %>
+            </li>
+            <li>
+                <%= user.email %>
+            </li>
+            <!-- Display user type -->
+            <li>
+                <%= user.type %>
+            </li>
+            <!-- Add buttons/links for promoting and demoting -->
+            <% if (user.type==='admin' ) { %>
+                <li><a href="/admin/demote/<%= user.id %>">Demote</a></li>
+                <% } else { %>
+                    <li><a href="/admin/promote/<%= user.id %>">Promote</a></li>
+                    <% } %>
+                        <% }) %>
     </ul>
-<%- include("templates/footer") %>
+
+    <%- include("templates/footer") %>

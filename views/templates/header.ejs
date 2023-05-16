@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- import axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- bootstrap imports -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- my files imports -->
+    <script src="pokemon.js"></script>
+    <link rel="stylesheet" href="pokemon.css">
 </head>
+
 <body>
-    <header>Header</header>
+    <%- include("svg")%>
+
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                    <span class="fs-4">Sean's website</span>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="/" class="nav-link <%= current === '/' ? 'active' : '' %>">Home</a>
+                    </li>
+                    <% if (isLoggedIn) { %>
+                        <li class="nav-item"><span class="nav-link disabled">Login</span></li>
+                        <% } else { %>
+                            <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                            <% } %>
+                                <li class="nav-item"><a href="/admin"
+                                        class="nav-link <%= current === '/admin' ? 'active' : '' %>">Admin</a></li>
+                                <li class="nav-item"><a href="/pokemon"
+                                        class="nav-link <%= current === '/pokemon' ? 'active' : '' %>">Pokemon</a></li>
+                                <li class="nav-item"><a href="/cats"
+                                        class="nav-link <%= current === '/cats' ? 'active' : '' %>">Members</a></li>
+                </ul>
+            </header>
+        </div>
+
+        <div class="container">
