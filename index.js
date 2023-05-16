@@ -12,6 +12,9 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 
+// Serve static files from the "public" folder
+app.use(express.static('public'));
+
 app.set('view engine', 'ejs');
 
 const Joi = require("joi");
@@ -85,19 +88,20 @@ function adminAuthorization(req, res, next) {
 }
 
 app.get('/', (req, res) => {
-	res.render("index", {current: '/'});
+	// In the code where you render the pokemon.ejs template
+	res.render('index', { current: '/' });
 });
 
 app.get('/cats', (req, res) => {
-	res.render("cats", {current: '/cats'});
+	res.render("cats", { current: '/cats' });
 });
 
 app.get('/login', (req, res) => {
-	res.render("login", {current: '/login'});
+	res.render("login", { current: '/login' });
 });
 
 app.get('/pokemon', (req, res) => {
-	res.render("pokemon"), {current: '/pokemon'};
+	res.render("pokemon", { current: '/pokemon' });
 });
 
 // A2-1

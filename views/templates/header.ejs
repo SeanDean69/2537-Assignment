@@ -26,8 +26,8 @@
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- my files imports -->
-    <script src="pokemon.js"></script>
-    <link rel="stylesheet" href="pokemon.css">
+    <script src="/pokemon.js"></script>
+    <link rel="stylesheet" href="/pokemon.css">
 </head>
 
 <body>
@@ -44,19 +44,16 @@
                 </a>
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="/" class="nav-link <%= current === '/' ? 'active' : '' %>">Home</a>
-                    </li>
-                    <% if (isLoggedIn) { %>
-                        <li class="nav-item"><span class="nav-link disabled">Login</span></li>
-                        <% } else { %>
-                            <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
-                            <% } %>
-                                <li class="nav-item"><a href="/admin"
-                                        class="nav-link <%= current === '/admin' ? 'active' : '' %>">Admin</a></li>
-                                <li class="nav-item"><a href="/pokemon"
-                                        class="nav-link <%= current === '/pokemon' ? 'active' : '' %>">Pokemon</a></li>
-                                <li class="nav-item"><a href="/cats"
-                                        class="nav-link <%= current === '/cats' ? 'active' : '' %>">Members</a></li>
+                    <li class="nav-item"><a href="/" 
+                        class="nav-link <%= current === '/' ? 'active' : '' %>">Home</a></li>
+                    <li class="nav-item"><a href="/login"
+                            class="nav-link <%= current === '/login' ? 'active' : '' %>">Login</a></li>
+                    <li class="nav-item"><a href="/admin"
+                            class="nav-link <%= current === '/admin' ? 'active' : '' %>">Admin</a></li>
+                    <li class="nav-item"><a href="/pokemon"
+                            class="nav-link <%= current === '/pokemon' ? 'active' : '' %>">Pokemon</a></li>
+                    <li class="nav-item"><a href="/cats"
+                            class="nav-link <%= current === '/cats' ? 'active' : '' %>">Members</a></li>
                 </ul>
             </header>
         </div>
